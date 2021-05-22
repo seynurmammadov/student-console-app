@@ -20,7 +20,7 @@ public class FileHelper {
 
     public static HashMap<Integer,Student> readFile() throws IOException {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        var studentsRead = gson.fromJson(Files.newBufferedReader(Path.of("C:\\Users\\Seynur\\Desktop\\LabTask\\students.json")),hashType);
+        var studentsRead = gson.fromJson(Files.newBufferedReader(Path.of("students.json")),hashType);
         if(studentsRead==null){
             studentsRead= new HashMap();
         }
@@ -29,7 +29,7 @@ public class FileHelper {
     public static void writeToFile(HashMap<Integer,Student> studentList) throws IOException {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String json = gson.toJson(studentList,hashType);
-        BufferedWriter bwjson= Files.newBufferedWriter(Path.of("C:\\Users\\Seynur\\Desktop\\LabTask\\students.json"));
+        BufferedWriter bwjson= Files.newBufferedWriter(Path.of("students.json"));
         bwjson.write(json);
         bwjson.close();
         getFiles();
