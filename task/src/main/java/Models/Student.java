@@ -147,7 +147,7 @@ public class Student {
         studentList.put(student.id,student);
         FileHelper.writeToFile(studentList);
     }
-    public static void search() throws IOException {
+    public static void search() {
         System.out.println("Сhoose by what parameters you want to search:");
         System.out.println("- 1 By name");
         System.out.println("- 2 By surname");
@@ -155,38 +155,22 @@ public class Student {
         System.out.println("- 0 Back");
         int prt = ConsoleReader.readNumber();
         String str ;
-        List<Student > students = new ArrayList<>();
 
         switch (prt){
             case 1:
                 System.out.println("Enter name:");
                 str = ConsoleReader.readString().toLowerCase(Locale.ROOT);
-                FileHelper.byName.values().stream().forEach(s->{
-                    if(s.getName().toLowerCase(Locale.ROOT).startsWith(str)){
-                        students.add(s);
-                    }
-                });
-                read(students);
+                read(FileHelper.byName.subMap(str,true,str+Character.MAX_VALUE,true).values().stream().collect(Collectors.toList()));
                 break;
             case 2:
                 System.out.println("Enter surname:");
                 str = ConsoleReader.readString().toLowerCase(Locale.ROOT);
-                FileHelper.bySurname.values().stream().forEach(s->{
-                    if(s.getSurname().toLowerCase(Locale.ROOT).startsWith(str)){
-                        students.add(s);
-                    }
-                });
-                read(students);
+                read(FileHelper.bySurname.subMap(str,true,str+Character.MAX_VALUE,true).values().stream().collect(Collectors.toList()));
                 break;
             case 3:
                 System.out.println("Enter lastname:");
                 str = ConsoleReader.readString().toLowerCase(Locale.ROOT);
-                FileHelper.byLastName.values().stream().forEach(s->{
-                    if(s.getLastName().toLowerCase(Locale.ROOT).startsWith(str)){
-                        students.add(s);
-                    }
-                });
-                read(students);
+                read(FileHelper.byLastName.subMap(str,true,str+Character.MAX_VALUE,true).values().stream().collect(Collectors.toList()));
                 break;
             case 0:
                 break;
